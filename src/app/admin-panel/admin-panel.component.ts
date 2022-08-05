@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-panel.component.scss'],
 })
 class AdminPanelComponent implements OnInit {
-  constructor() { }
-
   ngOnInit(): void {
   }
 }
