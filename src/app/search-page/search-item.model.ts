@@ -17,7 +17,7 @@ interface Statistics {
   favoriteCount: string;
   commentCount: string;
 }
-interface Localised  {
+interface Localised {
   title: string;
   description: string;
 }
