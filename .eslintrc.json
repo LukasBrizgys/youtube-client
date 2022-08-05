@@ -38,10 +38,9 @@
           }
         ],
         "no-empty-function": "off",
-        "@typescript-eslint/no-empty-function": "off", //Delete later
-        "@angular-eslint/no-empty-lifecycle-method": "off", //Delete later
-        "@typescript-eslint/no-useless-constructor": "off", //Delete later
-        "class-methods-use-this": "off" //Delete later
+        "@typescript-eslint/no-empty-function": "off",
+        "@angular-eslint/no-empty-lifecycle-method": "off",
+        "class-methods-use-this": "off"
       }
     },
     {
