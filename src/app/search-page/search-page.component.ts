@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import SearchResponse from './search-response.model';
 
 @Component({
   selector: 'app-search-page',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-page.component.scss'],
 })
 class SearchPageComponent implements OnInit {
+  searchResponse!: SearchResponse;
+
   ngOnInit(): void {
   }
 }
