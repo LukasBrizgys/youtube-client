@@ -10,6 +10,7 @@ import AdminPanelComponent from './admin-panel/admin-panel.component';
 import SearchPageComponent from './search-page/search-page.component';
 import SearchFormComponent from './search-page/search-form/search-form.component';
 import PreviewComponent from './preview/preview.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import PreviewComponent from './preview/preview.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
