@@ -8,10 +8,15 @@ import RegistrationComponent from './registration/registration.component';
 import LoginComponent from './login/login.component';
 import AdminPanelComponent from './admin-panel/admin-panel.component';
 import SearchPageComponent from './search-page/search-page.component';
+import CardComponent from './search-page/card/card.component';
 import SearchFormComponent from './search-page/search-form/search-form.component';
 import PreviewComponent from './preview/preview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { CardDirective } from './search-page/card/card.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,13 +26,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     AdminPanelComponent,
     SearchPageComponent,
+    CardComponent,
     SearchFormComponent,
     PreviewComponent,
+    CardDirective,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
