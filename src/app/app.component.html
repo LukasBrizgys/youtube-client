@@ -1,7 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <app-header (keywordEvent) = "receiveKeyword($event)" (showSearchPageEvent) = "receiveShowSearchPage($event)"></app-header>
+  <main class="content" role="main">
+    <app-search-page *ngIf="showSearchPage"></app-search-page>
+  </main>
 
+  <router-outlet></router-outlet>
+</html>
 
-<main class="content" role="main">
-
-</main>
-
-<router-outlet></router-outlet>
