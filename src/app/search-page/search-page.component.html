@@ -1,1 +1,3 @@
-<p>search-page works!</p>
+<div class="search-page-container">
+    <app-card class="card" *ngFor="let item of searchResponse?.items" [cardInfo] = "item"></app-card>
+</div>
