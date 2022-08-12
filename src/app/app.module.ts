@@ -17,6 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { CardDirective } from './search-page/card/card.directive';
+import { SettingsComponent } from './settings/settings.component';
+import { FilterPipe } from './pipes/filter/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,8 @@ import { CardDirective } from './search-page/card/card.directive';
     SearchFormComponent,
     PreviewComponent,
     CardDirective,
+    SettingsComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
