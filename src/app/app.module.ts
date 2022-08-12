@@ -19,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CardDirective } from './search-page/card/card.directive';
 import { SettingsComponent } from './settings/settings.component';
 import { FilterPipe } from './pipes/filter/filter.pipe';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { FilterPipe } from './pipes/filter/filter.pipe';
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
