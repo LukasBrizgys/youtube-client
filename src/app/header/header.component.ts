@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component, EventEmitter, OnInit, Output,
+} from '@angular/core';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -6,9 +9,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 class HeaderComponent implements OnInit {
   searchKeyword = '';
+
   @Output() keywordEvent = new EventEmitter<string>();
+
   @Output() showSearchPageEvent = new EventEmitter<boolean>();
+
   @Output() toggleSettingsEvent = new EventEmitter<any>();
+
   ngOnInit(): void {
   }
 
@@ -17,6 +24,7 @@ class HeaderComponent implements OnInit {
     this.keywordEvent.emit(this.searchKeyword);
     this.showSearchPageEvent.emit(true);
   }
+
   toggleSettings() {
     this.toggleSettingsEvent.emit();
   }

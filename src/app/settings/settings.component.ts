@@ -1,19 +1,27 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component, EventEmitter, OnInit, Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+class SettingsComponent implements OnInit {
   dateSortOrder : 'ascending' | 'descending' | null = null;
+
   viewSortOrder : 'ascending' | 'descending' | null = null;
+
   filterKeyword : string = '';
-  @Output() sortByDateEvent  = new EventEmitter<'ascending' | 'descending' | null>();
+
+  @Output() sortByDateEvent = new EventEmitter<'ascending' | 'descending' | null>();
+
   @Output() sortByViewsEvent = new EventEmitter<'ascending' | 'descending' | null>();
+
   @Output() filterByKeywordEvent = new EventEmitter<string>();
+
   toggleSortByDate() {
-    switch(this.dateSortOrder){
+    switch (this.dateSortOrder) {
       case null:
         this.dateSortOrder = 'ascending';
         break;
@@ -28,8 +36,9 @@ export class SettingsComponent implements OnInit {
     }
     this.sortByDateEvent.emit(this.dateSortOrder);
   }
+
   toggleSortByViews() {
-    switch(this.viewSortOrder){
+    switch (this.viewSortOrder) {
       case null:
         this.viewSortOrder = 'ascending';
         break;
@@ -44,13 +53,13 @@ export class SettingsComponent implements OnInit {
     }
     this.sortByViewsEvent.emit(this.viewSortOrder);
   }
+
   handleChange(event: any) {
     this.filterKeyword = event.target.value;
     this.filterByKeywordEvent.emit(this.filterKeyword);
   }
-  constructor() { }
 
   ngOnInit(): void {
   }
-
 }
+export default SettingsComponent;

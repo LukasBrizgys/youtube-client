@@ -2,21 +2,20 @@ import { Pipe, PipeTransform } from '@angular/core';
 import SearchItem from 'src/app/search-page/search-item.model';
 
 @Pipe({
-  name: 'filter'
+  name: 'filter',
 })
-export class FilterPipe implements PipeTransform {
-
+class FilterPipe implements PipeTransform {
   transform(value: SearchItem[], filterString: string): SearchItem[] {
-    if(value.length === 0 || !filterString) {
+    if (value.length === 0 || !filterString) {
       return value;
     }
-    let filteredItems : SearchItem[] = [];
-    for(const item of value) {
-      if(item.snippet.title.toLowerCase().includes(filterString.toLowerCase())) {
+    const filteredItems : SearchItem[] = [];
+    value.forEach((item) => {
+      if (item.snippet.title.toLowerCase().includes(filterString.toLowerCase())) {
         filteredItems.push(item);
       }
-    }
+    });
     return filteredItems;
   }
-
 }
+export default FilterPipe;

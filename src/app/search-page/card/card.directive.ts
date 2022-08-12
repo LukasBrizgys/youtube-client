@@ -1,4 +1,6 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import {
+  Directive, ElementRef, Input, OnInit,
+} from '@angular/core';
 
 function dateDifferenceInDays(date1 : Date, date2: Date) {
   const differenceInMilliseconds = date2.getTime() - date1.getTime();
@@ -14,26 +16,27 @@ function dateDifferenceInMonths(date1 : Date, date2 : Date) {
 }
 
 @Directive({
-  selector: '[appCard]'
+  selector: '[appCard]',
 })
-export class CardDirective {
+class CardDirective implements OnInit {
   @Input() publishDate : Date = new Date();
+
   constructor(private el: ElementRef) {
 
   }
+
   ngOnInit() {
     const currentDate : Date = new Date();
     const days = dateDifferenceInDays(new Date(this.publishDate), currentDate);
     const months = dateDifferenceInMonths(new Date(this.publishDate), currentDate);
-    if(months > 0) {
+    if (months > 0) {
       this.el.nativeElement.style.borderColor = 'yellow';
-      if(months > 6) this.el.nativeElement.style.borderColor = 'red';
-
+      if (months > 6) this.el.nativeElement.style.borderColor = 'red';
     }
-    if(months <= 0) {
-      if(days >= 7) this.el.nativeElement.style.borderColor = 'green';
-      if(days < 7) this.el.nativeElement.style.borderColor = 'blue';
+    if (months <= 0) {
+      if (days >= 7) this.el.nativeElement.style.borderColor = 'green';
+      if (days < 7) this.el.nativeElement.style.borderColor = 'blue';
     }
-
   }
 }
+export default CardDirective;
