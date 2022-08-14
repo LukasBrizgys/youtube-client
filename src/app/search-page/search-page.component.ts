@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import SearchResponse from './search-response.model';
 import SearchItem from './search-item.model';
+import sortOrder from '../shared/enums/sortOrder';
 
 @Component({
   selector: 'app-search-page',
@@ -14,13 +15,15 @@ import SearchItem from './search-item.model';
 class SearchPageComponent implements OnInit, OnChanges {
   isLoading : boolean = false;
 
+  isError : boolean = false;
+
   searchResponse!: SearchResponse;
 
   @Input() searchKeyword : string = '';
 
-  @Input() sortByDateOrder : 'ascending' | 'descending' | null = null;
+  @Input() sortByDateOrder? : string;
 
-  @Input() sortByViewsOrder : 'ascending' | 'descending' | null = null;
+  @Input() sortByViewsOrder? : string;
 
   @Input() filterKeyword : string = '';
 
@@ -36,22 +39,25 @@ class SearchPageComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.fetchSearchResults().subscribe((data) => {
-      this.searchResponse = data;
-      this.isLoading = false;
+    this.fetchSearchResults().subscribe({
+      next: (data) => {
+        this.isLoading = false;
+        this.searchResponse = data
+      },
+      error: () => this.isError = true
     });
   }
 
   ngOnChanges(changes : SimpleChanges) {
     if (changes['sortByViewsOrder']) {
-      if (changes['sortByViewsOrder'].currentValue === 'ascending') {
+      if (changes['sortByViewsOrder'].currentValue === sortOrder.asc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const viewsA = parseInt(a.statistics.viewCount, 10);
           const viewsB = parseInt(b.statistics.viewCount, 10);
           return viewsA - viewsB;
         });
       }
-      if (changes['sortByViewsOrder'].currentValue === 'descending') {
+      if (changes['sortByViewsOrder'].currentValue === sortOrder.desc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const viewsA = parseInt(a.statistics.viewCount, 10);
           const viewsB = parseInt(b.statistics.viewCount, 10);
@@ -60,14 +66,14 @@ class SearchPageComponent implements OnInit, OnChanges {
       }
     }
     if (changes['sortByDateOrder']) {
-      if (changes['sortByDateOrder'].currentValue === 'ascending') {
+      if (changes['sortByDateOrder'].currentValue === sortOrder.asc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const dateA = new Date(a.snippet.publishedAt);
           const dateB = new Date(b.snippet.publishedAt);
           return dateA.getTime() - dateB.getTime();
         });
       }
-      if (changes['sortByDateOrder'].currentValue === 'descending') {
+      if (changes['sortByDateOrder'].currentValue === sortOrder.desc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const dateA = new Date(a.snippet.publishedAt);
           const dateB = new Date(b.snippet.publishedAt);
