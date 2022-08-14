@@ -9,7 +9,9 @@ class FilterPipe implements PipeTransform {
     if (value.length === 0 || !filterString) {
       return value;
     }
-    const filteredItems : SearchItem[] = value.filter((item) => item.snippet.title.toLowerCase().includes(filterString.toLowerCase()));
+    const filteredItems : SearchItem[] = value.filter(
+      (item) => item.snippet.title.toLowerCase().includes(filterString.toLowerCase()),
+    );
     return filteredItems;
   }
 }

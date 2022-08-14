@@ -42,9 +42,9 @@ class SearchPageComponent implements OnInit, OnChanges {
     this.fetchSearchResults().subscribe({
       next: (data) => {
         this.isLoading = false;
-        this.searchResponse = data
+        this.searchResponse = data;
       },
-      error: () => this.isError = true
+      error: () => { this.isError = true; },
     });
   }
 

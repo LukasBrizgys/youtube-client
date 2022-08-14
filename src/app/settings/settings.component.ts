@@ -22,7 +22,7 @@ class SettingsComponent {
   @Output() filterByKeywordEvent = new EventEmitter<string>();
 
   toggleSortByDate() : void {
-    if(this.viewSortOrder) this.viewSortOrder = undefined;
+    if (this.viewSortOrder) this.viewSortOrder = undefined;
     switch (this.dateSortOrder) {
       case undefined:
         this.dateSortOrder = sortOrder.asc;
@@ -41,7 +41,7 @@ class SettingsComponent {
   }
 
   toggleSortByViews() : void {
-    if(this.dateSortOrder) this.dateSortOrder = undefined;
+    if (this.dateSortOrder) this.dateSortOrder = undefined;
     switch (this.viewSortOrder) {
       case undefined:
         this.viewSortOrder = sortOrder.asc;
@@ -62,6 +62,5 @@ class SettingsComponent {
     this.filterKeyword = event.target.value;
     this.filterByKeywordEvent.emit(this.filterKeyword);
   }
-
 }
 export default SettingsComponent;

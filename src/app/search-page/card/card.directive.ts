@@ -3,7 +3,6 @@ import {
 } from '@angular/core';
 import { dateDifferenceInDays, dateDifferenceInMonths } from 'src/app/shared/utils/dateUtils';
 
-
 @Directive({
   selector: '[appCard]',
 })
