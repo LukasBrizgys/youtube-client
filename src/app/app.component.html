@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <app-header (toggleSettingsEvent) = "receiveToggleSettings()" (keywordEvent) = "receiveKeyword($event)" (showSearchPageEvent) = "receiveShowSearchPage($event)"></app-header>
+  <app-header (toggleSettingsEvent) = "toggleSettings()" (keywordEvent) = "setKeyword($event)" (showSearchPageEvent) = "setShowSearchPage($event)"></app-header>
   <main class="content" role="main">
     <app-settings
-    (sortByDateEvent) = "receiveDateSortOrder($event)"
-    (sortByViewsEvent) = "receiveViewsSortOrder($event)"
-    (filterByKeywordEvent) = "receiveFilterKeyword($event)"
+    (sortByDateEvent) = "setDateSortOrder($event)"
+    (sortByViewsEvent) = "setViewsSortOrder($event)"
+    (filterByKeywordEvent) = "setFilterKeyword($event)"
     *ngIf="isSettingsOpen"
     >
   </app-settings>

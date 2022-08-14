@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,35 +11,35 @@ class AppComponent {
 
   isSettingsOpen : boolean = false;
 
-  dateSortOrder : 'ascending' | 'descending' | null = null;
+  dateSortOrder? : string;
 
-  viewsSortOrder : 'ascending' | 'descending' | null = null;
+  viewsSortOrder? : string;
 
   filterKeyword : string = '';
 
-  title = 'youtube-client';
+  title : string = 'youtube-client';
 
-  receiveKeyword($event : any) {
+  setKeyword($event : string) : void {
     this.searchKeyword = $event;
   }
 
-  receiveShowSearchPage($event: any) {
+  setShowSearchPage($event: boolean) : void {
     this.showSearchPage = $event;
   }
 
-  receiveToggleSettings() {
+  toggleSettings() : void {
     this.isSettingsOpen = !this.isSettingsOpen;
   }
 
-  receiveDateSortOrder($event : any) {
+  setDateSortOrder($event? : string) : void {
     this.dateSortOrder = $event;
   }
 
-  receiveViewsSortOrder($event : any) {
+  setViewsSortOrder($event? : string) : void {
     this.viewsSortOrder = $event;
   }
 
-  receiveFilterKeyword($event : any) {
+  setFilterKeyword($event : string) : void {
     this.filterKeyword = $event;
   }
 }
