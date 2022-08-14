@@ -1,65 +1,67 @@
 import {
-  Component, EventEmitter, OnInit, Output,
+  Component, EventEmitter, Output,
 } from '@angular/core';
+import sortOrder from '../shared/enums/sortOrder';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-class SettingsComponent implements OnInit {
-  dateSortOrder : 'ascending' | 'descending' | null = null;
+class SettingsComponent {
+  dateSortOrder? : string;
 
-  viewSortOrder : 'ascending' | 'descending' | null = null;
+  viewSortOrder? : string;
 
   filterKeyword : string = '';
 
-  @Output() sortByDateEvent = new EventEmitter<'ascending' | 'descending' | null>();
+  @Output() sortByDateEvent = new EventEmitter<string | undefined>();
 
-  @Output() sortByViewsEvent = new EventEmitter<'ascending' | 'descending' | null>();
+  @Output() sortByViewsEvent = new EventEmitter<string | undefined>();
 
   @Output() filterByKeywordEvent = new EventEmitter<string>();
 
-  toggleSortByDate() {
+  toggleSortByDate() : void {
+    if(this.viewSortOrder) this.viewSortOrder = undefined;
     switch (this.dateSortOrder) {
-      case null:
-        this.dateSortOrder = 'ascending';
+      case undefined:
+        this.dateSortOrder = sortOrder.asc;
         break;
-      case 'ascending':
-        this.dateSortOrder = 'descending';
+      case sortOrder.asc:
+        this.dateSortOrder = sortOrder.desc;
         break;
-      case 'descending':
-        this.dateSortOrder = null;
+      case sortOrder.desc:
+        this.dateSortOrder = sortOrder.asc;
         break;
       default:
-        this.dateSortOrder = null;
+        this.dateSortOrder = undefined;
     }
+
     this.sortByDateEvent.emit(this.dateSortOrder);
   }
 
-  toggleSortByViews() {
+  toggleSortByViews() : void {
+    if(this.dateSortOrder) this.dateSortOrder = undefined;
     switch (this.viewSortOrder) {
-      case null:
-        this.viewSortOrder = 'ascending';
+      case undefined:
+        this.viewSortOrder = sortOrder.asc;
         break;
-      case 'ascending':
-        this.viewSortOrder = 'descending';
+      case sortOrder.asc:
+        this.viewSortOrder = sortOrder.desc;
         break;
-      case 'descending':
-        this.viewSortOrder = null;
+      case sortOrder.desc:
+        this.viewSortOrder = sortOrder.asc;
         break;
       default:
-        this.viewSortOrder = null;
+        this.viewSortOrder = undefined;
     }
     this.sortByViewsEvent.emit(this.viewSortOrder);
   }
 
-  handleChange(event: any) {
+  handleChange(event: any) : void {
     this.filterKeyword = event.target.value;
     this.filterByKeywordEvent.emit(this.filterKeyword);
   }
 
-  ngOnInit(): void {
-  }
 }
 export default SettingsComponent;
