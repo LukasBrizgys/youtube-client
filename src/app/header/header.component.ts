@@ -8,7 +8,7 @@ import {
   styleUrls: ['./header.component.scss'],
 })
 class HeaderComponent {
-  searchKeyword = '';
+  searchKeyword : string = '';
 
   @Output() keywordEvent = new EventEmitter<string>();
 
@@ -16,13 +16,13 @@ class HeaderComponent {
 
   @Output() toggleSettingsEvent = new EventEmitter<any>();
 
-  handleSearch(keyword : string) {
+  handleSearch(keyword : string) : void {
     this.searchKeyword = keyword;
     this.keywordEvent.emit(this.searchKeyword);
     this.showSearchPageEvent.emit(true);
   }
 
-  toggleSettings() {
+  toggleSettings() : void {
     this.toggleSettingsEvent.emit();
   }
 }
