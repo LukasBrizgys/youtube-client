@@ -1,1 +1,16 @@
-<p>header works!</p>
+<header>
+  <div class="header-container">
+    <div class="play-icon-container">
+      <mat-icon class="play-icon">play_arrow</mat-icon>
+    </div>
+
+    <div class="search-container">
+      <input #searchInput class="search-input" name="searchInput" placeholder="Enter text to search...">
+      <button mat-raised-button color="primary" (click) = "handleSearch(searchInput.value)" class="search-button">Search</button>
+    </div>
+    <button (click)="toggleSettings()" mat-raised-button color="primary" class="settings-button"><mat-icon>tune</mat-icon></button>
+
+  </div>
+  <button mat-raised-button color="primary" class="login-header-button">Your Name <mat-icon>account_circle</mat-icon></button>
+
+</header>

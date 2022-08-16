@@ -1,0 +1,21 @@
+.settings-container{
+  flex-basis:100%;
+  padding:10px;
+  color:white;
+  background-color:#252525;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  vertical-align:middle;
+  p{
+    margin:0;
+  }
+}
+.filter-container{
+  display:flex;
+  gap:5px;
+  input{
+    color:black;
+  }
+}

@@ -13,7 +13,7 @@ interface Thumbnails {
 interface Statistics {
   viewCount: string;
   likeCount: string;
-  dislikeCOunt: string;
+  dislikeCount: string;
   favoriteCount: string;
   commentCount: string;
 }

@@ -1,0 +1,17 @@
+<div class="settings-container">
+  <p>Sorting by: </p>
+  <button (click)="toggleSortByDate()" mat-raised-button color="primary" class="sort-button">
+    Date
+    <mat-icon *ngIf="dateSortOrder === SORT_ORDER.asc">arrow_drop_up</mat-icon>
+    <mat-icon *ngIf="dateSortOrder === SORT_ORDER.desc">arrow_drop_down</mat-icon>
+  </button>
+  <button (click)="toggleSortByViews()" mat-raised-button color="primary" class="sort-button">
+    Count of views
+    <mat-icon *ngIf="viewSortOrder === SORT_ORDER.asc">arrow_drop_up</mat-icon>
+    <mat-icon *ngIf="viewSortOrder === SORT_ORDER.desc">arrow_drop_down</mat-icon>
+  </button>
+  <div class="filter-container">
+    <div>By word or sentence: </div>
+    <input (keyup)="handleChange($event)" name="filterKeyword" type="text">
+  </div>
+</div>
