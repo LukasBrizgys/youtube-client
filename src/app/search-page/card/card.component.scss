@@ -1,5 +1,5 @@
-.search-card-inner {
-  background-color:rgba(37, 37, 37, 0.8);
+.search-card-inner{
+  background-color: rgba(37, 37, 37, 0.8);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -10,17 +10,17 @@
   border-bottom-style:solid;
   border-bottom-color:white;
 }
-.statistic {
+.statistic{
   display:flex;
   justify-content:center;
   align-items:center;
 }
-.card-statistics {
+.card-statistics{
   display:flex;
   justify-content:center;
   gap:10px;
 }
-.card-title {
+.card-title{
   display:flex;
   align-items:center;
   text-align:center;
