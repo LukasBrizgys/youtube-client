@@ -15,6 +15,8 @@ class SettingsComponent {
 
   filterKeyword : string = '';
 
+  SORT_ORDER = sortOrder;
+
   @Output() sortByDateEvent = new EventEmitter<string | undefined>();
 
   @Output() sortByViewsEvent = new EventEmitter<string | undefined>();
