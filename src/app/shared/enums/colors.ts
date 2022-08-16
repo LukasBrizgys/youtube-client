@@ -1,7 +1,7 @@
-const colors = {
-  yellow: 'yellow',
-  red: 'red',
-  green: 'green',
-  blue: 'blue'
+enum colors {
+  yellow = 'yellow',
+  red = 'red',
+  green = 'green',
+  blue = 'blue'
 }
 export default colors;

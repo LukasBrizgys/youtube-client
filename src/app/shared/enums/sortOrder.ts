@@ -1,5 +1,5 @@
-const sortOrder = {
-  asc: 'ascending',
-  desc: 'descending',
+enum sortOrder {
+  asc = 'ascending',
+  desc = 'descending'
 };
 export default sortOrder;
