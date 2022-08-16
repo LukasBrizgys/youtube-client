@@ -1,5 +1,5 @@
 <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
 <p *ngIf="isError">An error occured</p>
 <div *ngIf="!isLoading && !isError && searchResponse" class="search-page-container">
-    <app-card class="card" *ngFor="let item of searchResponse.items | filter: filterKeyword" [cardInfo] = "item"></app-card>
+    <app-card class="card" *ngFor="let item of searchResponse.items | filter: filterKeyword" [cardInfo]="item"></app-card>
 </div>
