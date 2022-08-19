@@ -1,5 +1,5 @@
 import {
-  Component, EventEmitter, Input, Output,
+  Component, Input,
 } from '@angular/core';
 import LoginService from 'src/app/auth/service/login.service';
 

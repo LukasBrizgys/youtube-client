@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <app-header (toggleSettingsEvent) = "toggleSettings()" (keywordEvent) = "setKeyword($event)" (showSearchPageEvent) = "setShowSearchPage($event)"></app-header>
+  <app-header></app-header>
   <main class="content" role="main">
-    <app-settings
-    (sortByDateEvent) = "setDateSortOrder($event)"
-    (sortByViewsEvent) = "setViewsSortOrder($event)"
-    (filterByKeywordEvent) = "setFilterKeyword($event)"
-    *ngIf="isSettingsOpen"
-    >
-  </app-settings>
-    <app-search-page
-    [sortByDateOrder] = "dateSortOrder"
-    [sortByViewsOrder] = "viewsSortOrder"
-    [filterKeyword] = "filterKeyword"
-    *ngIf="showSearchPage">
-  </app-search-page>
+    <router-outlet></router-outlet>
   </main>
 
-  <router-outlet></router-outlet>
+
 </html>
 
