@@ -8,6 +8,7 @@ import LoginService from '../../service/login.service';
 })
 class LoginComponent {
   constructor(private loginService : LoginService) {}
+
   handleLogin = () : void => this.loginService.handleLogin();
 }
 export default LoginComponent;

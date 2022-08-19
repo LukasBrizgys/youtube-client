@@ -1,5 +1,5 @@
 import {
-  Component, EventEmitter, OnInit, Output,
+  Component, OnInit,
 } from '@angular/core';
 import SortingService from 'src/app/youtube/service/sorting/sorting.service';
 import sortOrder from '../../../shared/enums/sortOrder';
@@ -18,7 +18,8 @@ class FiltersComponent implements OnInit {
 
   SORT_ORDER : typeof sortOrder = sortOrder;
 
-  constructor( private sortingService : SortingService ) { }
+  constructor(private sortingService : SortingService) { }
+
   ngOnInit() : void {
     this.sortingService.sortByDateOrder.subscribe((value : string | undefined) => {
       this.dateSortOrder = value;
@@ -28,12 +29,13 @@ class FiltersComponent implements OnInit {
     });
     this.sortingService.filterKeyword.subscribe((value : string) => {
       this.filterKeyword = value;
-    })
+    });
   }
-  toggleSortByDate() : void {
-    if(this.viewSortOrder) this.sortingService.setSortByViewsOrder(undefined);
 
-    switch(this.dateSortOrder) {
+  toggleSortByDate() : void {
+    if (this.viewSortOrder) this.sortingService.setSortByViewsOrder(undefined);
+
+    switch (this.dateSortOrder) {
       case undefined:
         this.sortingService.setSortByDateOrder(sortOrder.asc);
         break;
@@ -46,11 +48,12 @@ class FiltersComponent implements OnInit {
       default:
         this.sortingService.setSortByDateOrder(undefined);
     }
-  };
-  toggleSortByViews() : void {
-    if(this.dateSortOrder) this.sortingService.setSortByDateOrder(undefined);
+  }
 
-    switch(this.viewSortOrder) {
+  toggleSortByViews() : void {
+    if (this.dateSortOrder) this.sortingService.setSortByDateOrder(undefined);
+
+    switch (this.viewSortOrder) {
       case undefined:
         this.sortingService.setSortByViewsOrder(sortOrder.asc);
         break;
@@ -64,6 +67,7 @@ class FiltersComponent implements OnInit {
         this.sortingService.setSortByViewsOrder(undefined);
     }
   }
+
   handleChange(event: any) : void {
     this.sortingService.setFilterKeyword(event.target.value);
   }

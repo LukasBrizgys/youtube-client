@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import SearchItem from '../../models/search-item.model';
 import ItemService from '../../service/item/item.service';
@@ -10,8 +10,15 @@ import ItemService from '../../service/item/item.service';
 })
 class PreviewComponent implements OnInit {
   isLoading : boolean = false;
+
   cardInfo! : SearchItem;
-  constructor(private itemService : ItemService, private activatedRoute: ActivatedRoute, private router : Router) {}
+
+  constructor(
+    private itemService : ItemService,
+    private activatedRoute: ActivatedRoute,
+    private router : Router,
+  ) {}
+
   ngOnInit(): void {
     this.isLoading = true;
     const id = this.activatedRoute.snapshot.url[0].path;
@@ -23,9 +30,9 @@ class PreviewComponent implements OnInit {
       },
       error: () => {
         this.isLoading = false;
-        this.router.navigate(['/404'])
-      }
-    })
+        this.router.navigate(['/404']);
+      },
+    });
   }
 }
 export default PreviewComponent;

@@ -8,26 +8,24 @@ import YoutubeRoutingModule from './youtube-routing.module';
 import SearchPageComponent from './pages/search-page/search-page.component';
 import PreviewComponent from './pages/preview/preview.component';
 
-
-
 @NgModule({
   declarations: [
     CardComponent,
     CardDirective,
     FilterPipe,
     SearchPageComponent,
-    PreviewComponent
+    PreviewComponent,
   ],
   imports: [
-      CommonModule,
-      SharedModule,
-      YoutubeRoutingModule,
-    ],
-  exports : [
+    CommonModule,
+    SharedModule,
+    YoutubeRoutingModule,
+  ],
+  exports: [
     CardComponent,
     CardDirective,
     FilterPipe,
-  ]
+  ],
 
 })
 class YoutubeModule { }

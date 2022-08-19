@@ -1,5 +1,5 @@
-enum sortOrder {
+enum SortOrder {
   asc = 'ascending',
-  desc = 'descending'
-};
-export default sortOrder;
+  desc = 'descending',
+}
+export default SortOrder;

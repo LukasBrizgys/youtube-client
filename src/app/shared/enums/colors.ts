@@ -1,7 +1,7 @@
-enum colors {
+enum Colors {
   yellow = 'yellow',
   red = 'red',
   green = 'green',
-  blue = 'blue'
+  blue = 'blue',
 }
-export default colors;
+export default Colors;
