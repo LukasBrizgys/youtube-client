@@ -1,0 +1,23 @@
+<mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+<div class="preview-container" *ngIf="cardInfo && !isLoading">
+  <img [src]="cardInfo.snippet.thumbnails.standard.url"
+  [width]="cardInfo.snippet.thumbnails.standard.width"
+  [height]="cardInfo.snippet.thumbnails.standard.height" class="preview-image">
+
+  <div appCard [publishDate]="cardInfo.snippet.publishedAt" class="preview-info">
+    <div class="info-row">
+      <div class="title"><b>{{cardInfo.snippet.title}}</b></div>
+      <div class="publish-date">{{ cardInfo.snippet.publishedAt | date: 'long'}}</div>
+    </div>
+    <div class="preview-description">
+      <h2><b>Description:</b></h2>
+      <div class="description-text">{{cardInfo.snippet.description}}</div>
+    </div>
+    <div class="preview-statistics">
+      <div class="inner-statistic"><mat-icon>visibility</mat-icon> {{cardInfo.statistics.viewCount}}</div>
+      <div class="inner-statistic"><mat-icon>thumb_up</mat-icon> {{cardInfo.statistics.likeCount}}</div>
+      <div class="inner-statistic"><mat-icon>thumb_down</mat-icon> {{cardInfo.statistics.dislikeCount}}</div>
+      <div class="inner-statistic"><mat-icon>description</mat-icon> {{cardInfo.statistics.favoriteCount}}</div>
+    </div>
+  </div>
+</div>

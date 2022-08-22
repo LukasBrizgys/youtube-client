@@ -1,0 +1,17 @@
+<header>
+  <div class="header-container">
+    <div class="play-icon-container">
+      <mat-icon class="play-icon">play_arrow</mat-icon>
+    </div>
+
+    <div class="search-container">
+      <input #searchInput class="search-input" name="searchInput" placeholder="Enter text to search...">
+      <button routerLink="/videos" mat-raised-button color="primary" class="search-button">Search</button>
+    </div>
+    <button (click)="toggleSettings()" mat-raised-button color="primary" class="settings-button"><mat-icon>tune</mat-icon></button>
+
+  </div>
+  <button *ngIf="!isLoggedIn" mat-raised-button color="primary" class="login-header-button">Your Name <mat-icon>account_circle</mat-icon></button>
+  <button *ngIf="isLoggedIn" mat-raised-button color="primary" (click) = "handleLogout()"  class="login-header-button">Logout</button>
+</header>
+<app-filters *ngIf="isSettingsOpen"></app-filters>
