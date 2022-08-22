@@ -1,6 +1,7 @@
 import {
-  Component, Input,
+  Component, Input, OnDestroy,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import LoginService from 'src/app/auth/service/login.service';
 
 @Component({
@@ -8,17 +9,22 @@ import LoginService from 'src/app/auth/service/login.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-class HeaderComponent {
-  constructor(private loginService : LoginService) {}
-
-  isAuthenticated = () : boolean => this.loginService.isAuthenticated();
-
+class HeaderComponent implements OnDestroy{
+  isLoggedIn : boolean = false;
+  subscription! : Subscription;
+  constructor(private loginService : LoginService) {
+    this.isLoggedIn = this.loginService.getIsLoggedIn();
+    this.subscription = this.loginService.getIsLoggedInChange().subscribe((value) => this.isLoggedIn = value);
+  }
   @Input() isSettingsOpen : boolean = false;
-
   handleLogout = () : void => this.loginService.handleLogout();
 
   toggleSettings() : void {
     this.isSettingsOpen = !this.isSettingsOpen;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
 export default HeaderComponent;
