@@ -8,12 +8,16 @@ import LoginService from 'src/app/auth/service/login.service';
 @Injectable({
   providedIn: 'root',
 })
-class AuthGuard implements CanActivate, CanLoad, OnDestroy{
+class AuthGuard implements CanActivate, CanLoad, OnDestroy {
   isLoggedIn : boolean = false;
+
   subscription! : Subscription;
+
   constructor(private loginService : LoginService, private router : Router) {
     this.isLoggedIn = loginService.getIsLoggedIn();
-    this.loginService.getIsLoggedInChange().subscribe((value) => this.isLoggedIn = value);
+    this.loginService.getIsLoggedInChange().subscribe((value) => {
+      this.isLoggedIn = value;
+    });
   }
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -31,6 +35,7 @@ class AuthGuard implements CanActivate, CanLoad, OnDestroy{
     this.router.navigate(['/login']);
     return false;
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

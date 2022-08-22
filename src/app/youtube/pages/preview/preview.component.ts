@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import SearchItem from '../../models/search-item.model';
 import ItemService from '../../service/item/item.service';
 

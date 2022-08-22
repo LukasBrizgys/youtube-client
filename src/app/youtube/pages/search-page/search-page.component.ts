@@ -1,12 +1,12 @@
 import {
   Component, Input, OnInit,
 } from '@angular/core';
+import { take } from 'rxjs';
 import SearchResponse from '../../models/search-response.model';
 import SearchItem from '../../models/search-item.model';
 import { SortOrder } from '../../../shared/enums/sortOrder';
 import SortingService from '../../service/sorting/sorting.service';
 import ItemService from '../../service/item/item.service';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -23,7 +23,6 @@ class SearchPageComponent implements OnInit {
   @Input() searchKeyword : string = '';
 
   filterKeyword : string = '';
-
 
   constructor(private sortingService : SortingService, private itemService : ItemService) {}
 
@@ -72,7 +71,6 @@ class SearchPageComponent implements OnInit {
     this.sortingService.filterKeyword.pipe(take(1)).subscribe((value : string) => {
       this.filterKeyword = value;
     });
-
   }
 }
 export default SearchPageComponent;
