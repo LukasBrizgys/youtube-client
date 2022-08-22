@@ -6,6 +6,7 @@ import SearchItem from '../../models/search-item.model';
 import SortOrder from '../../../shared/enums/sortOrder';
 import SortingService from '../../service/sorting/sorting.service';
 import ItemService from '../../service/item/item.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -23,18 +24,19 @@ class SearchPageComponent implements OnInit {
 
   filterKeyword : string = '';
 
+
   constructor(private sortingService : SortingService, private itemService : ItemService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.itemService.fetchSearchResults().subscribe({
+    this.itemService.fetchSearchResults().pipe(take(1)).subscribe({
       next: (data) => {
         this.isLoading = false;
         this.searchResponse = data;
       },
       error: () => { this.isError = true; },
     });
-    this.sortingService.sortByDateOrder.subscribe((value : string | undefined) => {
+    this.sortingService.sortByDateOrder.pipe(take(1)).subscribe((value : string | undefined) => {
       if (value === SortOrder.asc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const dateA = new Date(a.snippet.publishedAt);
@@ -51,7 +53,7 @@ class SearchPageComponent implements OnInit {
       }
     });
 
-    this.sortingService.sortByViewsOrder.subscribe((value : string | undefined) => {
+    this.sortingService.sortByViewsOrder.pipe(take(1)).subscribe((value : string | undefined) => {
       if (value === SortOrder.asc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const viewsA = parseInt(a.statistics.viewCount, 10);
@@ -67,9 +69,10 @@ class SearchPageComponent implements OnInit {
         });
       }
     });
-    this.sortingService.filterKeyword.subscribe((value : string) => {
+    this.sortingService.filterKeyword.pipe(take(1)).subscribe((value : string) => {
       this.filterKeyword = value;
     });
+
   }
 }
 export default SearchPageComponent;
