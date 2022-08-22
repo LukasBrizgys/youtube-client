@@ -2,7 +2,7 @@ import {
   Component, OnInit,
 } from '@angular/core';
 import SortingService from 'src/app/youtube/service/sorting/sorting.service';
-import sortOrder from '../../../shared/enums/sortOrder';
+import { SortOrder } from '../../../shared/enums/sortOrder';
 
 @Component({
   selector: 'app-filters',
@@ -16,7 +16,7 @@ class FiltersComponent implements OnInit {
 
   filterKeyword : string = '';
 
-  SORT_ORDER : typeof sortOrder = sortOrder;
+  SORT_ORDER : typeof SortOrder = SortOrder;
 
   constructor(private sortingService : SortingService) { }
 
@@ -37,13 +37,13 @@ class FiltersComponent implements OnInit {
 
     switch (this.dateSortOrder) {
       case undefined:
-        this.sortingService.setSortByDateOrder(sortOrder.asc);
+        this.sortingService.setSortByDateOrder(SortOrder.asc);
         break;
-      case sortOrder.asc:
-        this.sortingService.setSortByDateOrder(sortOrder.desc);
+      case SortOrder.asc:
+        this.sortingService.setSortByDateOrder(SortOrder.desc);
         break;
-      case sortOrder.desc:
-        this.sortingService.setSortByDateOrder(sortOrder.asc);
+      case SortOrder.desc:
+        this.sortingService.setSortByDateOrder(SortOrder.asc);
         break;
       default:
         this.sortingService.setSortByDateOrder(undefined);
@@ -55,13 +55,13 @@ class FiltersComponent implements OnInit {
 
     switch (this.viewSortOrder) {
       case undefined:
-        this.sortingService.setSortByViewsOrder(sortOrder.asc);
+        this.sortingService.setSortByViewsOrder(SortOrder.asc);
         break;
-      case sortOrder.asc:
-        this.sortingService.setSortByViewsOrder(sortOrder.desc);
+      case SortOrder.asc:
+        this.sortingService.setSortByViewsOrder(SortOrder.desc);
         break;
-      case sortOrder.desc:
-        this.sortingService.setSortByViewsOrder(sortOrder.asc);
+      case SortOrder.desc:
+        this.sortingService.setSortByViewsOrder(SortOrder.asc);
         break;
       default:
         this.sortingService.setSortByViewsOrder(undefined);

@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import SearchResponse from '../../models/search-response.model';
 import SearchItem from '../../models/search-item.model';
-import SortOrder from '../../../shared/enums/sortOrder';
+import { SortOrder } from '../../../shared/enums/sortOrder';
 import SortingService from '../../service/sorting/sorting.service';
 import ItemService from '../../service/item/item.service';
 import { take } from 'rxjs';
