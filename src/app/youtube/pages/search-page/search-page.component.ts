@@ -1,7 +1,7 @@
 import {
-  Component, Input, OnInit,
+  Component, OnDestroy, OnInit,
 } from '@angular/core';
-import { take } from 'rxjs';
+import { mergeMap, Subject, takeUntil } from 'rxjs';
 import SearchResponse from '../../models/search-response.model';
 import SearchItem from '../../models/search-item.model';
 import { SortOrder } from '../../../shared/enums/sortOrder';
@@ -13,29 +13,34 @@ import ItemService from '../../service/item/item.service';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss'],
 })
-class SearchPageComponent implements OnInit {
+class SearchPageComponent implements OnInit, OnDestroy{
   isLoading : boolean = false;
 
   isError : boolean = false;
 
   searchResponse!: SearchResponse;
 
-  @Input() searchKeyword : string = '';
-
   filterKeyword : string = '';
+
+  destroy$ : Subject<boolean> = new Subject<boolean>();
 
   constructor(private sortingService : SortingService, private itemService : ItemService) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.itemService.fetchSearchResults().pipe(take(1)).subscribe({
-      next: (data) => {
-        this.isLoading = false;
-        this.searchResponse = data;
-      },
-      error: () => { this.isError = true; },
-    });
-    this.sortingService.sortByDateOrder.pipe(take(1)).subscribe((value : string | undefined) => {
+   this.itemService.getSearchStringObs()
+   .pipe(mergeMap((result : string) => {
+    this.isLoading = true
+    return this.itemService.fetchSearchResults(result);
+    }
+    ))
+    .pipe(takeUntil(this.destroy$)).subscribe({
+        next: (data : SearchResponse) => {
+
+          this.isLoading = false;
+          this.searchResponse = data;
+        }
+    })
+    this.sortingService.sortByDateOrder.pipe(takeUntil(this.destroy$)).subscribe((value : string | undefined) => {
       if (value === SortOrder.asc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const dateA = new Date(a.snippet.publishedAt);
@@ -52,7 +57,7 @@ class SearchPageComponent implements OnInit {
       }
     });
 
-    this.sortingService.sortByViewsOrder.pipe(take(1)).subscribe((value : string | undefined) => {
+    this.sortingService.sortByViewsOrder.pipe(takeUntil(this.destroy$)).subscribe((value : string | undefined) => {
       if (value === SortOrder.asc) {
         this.searchResponse.items.sort((a : SearchItem, b : SearchItem) => {
           const viewsA = parseInt(a.statistics.viewCount, 10);
@@ -68,9 +73,13 @@ class SearchPageComponent implements OnInit {
         });
       }
     });
-    this.sortingService.filterKeyword.pipe(take(1)).subscribe((value : string) => {
+    this.sortingService.filterKeyword.pipe(takeUntil(this.destroy$)).subscribe((value : string) => {
       this.filterKeyword = value;
     });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
 export default SearchPageComponent;
