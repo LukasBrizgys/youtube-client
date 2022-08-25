@@ -4,6 +4,7 @@
 
 const environment = {
   production: false,
+  youtubeApiKey: process.env.NG_APP_API_KEY,
 };
 export default environment;
 /*
