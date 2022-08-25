@@ -111,6 +111,14 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/youtube-client",
+            "netlifyToken": "yz7Hs_ShVhj3YZ9Evi3pGmpJUaBhucAQsZWsgXD_cBU",
+            "siteId": ""
+          }
         }
       }
     }
