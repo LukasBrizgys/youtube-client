@@ -21,7 +21,7 @@ class ItemService {
   fetchSearchResults(searchString : string) : Observable<SearchResponse> {
     const idArray : string[] = [];
     return this.http
-      .get<any>(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchString}`)
+      .get<any>(`/search?part=snippet&maxResults=10&q=${searchString}`)
       .pipe(
         map((response : any) => new SearchResponse(
           response.kind,
@@ -43,7 +43,7 @@ class ItemService {
   }
 
   fetchVideoDetails(ids : string[]) {
-    return this.http.get<SearchResponse>(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${ids.toString()}`);
+    return this.http.get<SearchResponse>(`/videos?part=snippet,statistics&id=${ids.toString()}`);
   }
 
   getSearchStringObs() : Observable<string> {
