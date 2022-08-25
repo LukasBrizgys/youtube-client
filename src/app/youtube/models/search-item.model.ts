@@ -36,6 +36,7 @@ interface Snippet {
 
 class SearchItem {
   id: string;
+
   kind: string;
 
   etag: string;

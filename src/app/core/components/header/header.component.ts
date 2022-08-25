@@ -25,12 +25,13 @@ class HeaderComponent implements OnDestroy {
   }
 
   handleLogout = () : void => this.loginService.handleLogout();
+
   handleKeyUp(searchString : string) : void {
-    if(searchString.length >= 3) {
+    if (searchString.length >= 3) {
       this.itemService.search(searchString);
     }
-
   }
+
   toggleSettings() : void {
     this.isSettingsOpen = !this.isSettingsOpen;
   }

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { debounceTime, map, Observable, Subject, switchMap, throwError } from 'rxjs';
-import environment from 'src/environments/environment';
+import {
+  debounceTime, map, Observable, Subject, switchMap, throwError,
+} from 'rxjs';
 import SearchItem from '../../models/search-item.model';
 import SearchResponse from '../../models/search-response.model';
 
@@ -10,36 +11,45 @@ import SearchResponse from '../../models/search-response.model';
 })
 class ItemService {
   searchStringObs : Subject<string> = new Subject<string>();
+
   searchResponseObs : Subject<SearchResponse> = new Subject<SearchResponse>();
+
   searchResponse! : SearchResponse;
+
   constructor(private http: HttpClient) { }
+
   fetchSearchResults(searchString : string) : Observable<SearchResponse> {
     const idArray : string[] = [];
-    return this.http.get<any>(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchString}`)
+    return this.http
+      .get<any>(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchString}`)
       .pipe(
-        map((response) => new SearchResponse(response.kind, response.etag, response.pageInfo, response.items.map((item : any) =>
-        new SearchItem(item.id.videoId, item.id.kind, item.etag,item.snippet, item.statistics)
-        ))),
-        switchMap((data : SearchResponse) =>{
-            new SearchResponse(
-              data.kind,
-              data.etag,
-              data.pageInfo,
-              data.items.map((item : any) =>
-                new SearchItem(item.id,item.kind,item.etag,item.snippet,item.statistics)
-              )
-            )
-          data.items.forEach((video : any) => {idArray.push(video.id)})
+        map((response : any) => new SearchResponse(
+          response.kind,
+          response.etag,
+          response.pageInfo,
+          response.items.map((item : any) => new SearchItem(
+            item.id.videoId,
+            item.id.kind,
+            item.etag,
+            item.snippet,
+            item.statistics,
+          )),
+        )),
+        switchMap((data : SearchResponse) => {
+          data.items.forEach((video : any) => { idArray.push(video.id); });
           return this.fetchVideoDetails(idArray);
         }),
       );
   }
+
   fetchVideoDetails(ids : string[]) {
-    return this.http.get<SearchResponse>(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${ids.toString()}`)
+    return this.http.get<SearchResponse>(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${ids.toString()}`);
   }
+
   getSearchStringObs() : Observable<string> {
     return this.searchStringObs.pipe(debounceTime(1000));
   }
+
   getSingleVideo(id : string) : Observable<SearchItem> {
     return this.fetchVideoDetails([id])
       .pipe(
@@ -51,6 +61,7 @@ class ItemService {
         }),
       );
   }
+
   search(searchString : string) {
     this.searchStringObs.next(searchString);
   }

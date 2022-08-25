@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import {
   CanActivate, CanLoad, Router, UrlTree,
 } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import LoginService from 'src/app/auth/service/login.service';
 
 @Injectable({
@@ -11,11 +11,11 @@ import LoginService from 'src/app/auth/service/login.service';
 class AuthGuard implements CanActivate, CanLoad, OnDestroy {
   isLoggedIn : boolean = false;
 
-  subscription! : Subscription;
+  destroy$ : Subject<boolean> = new Subject<boolean>();
 
   constructor(private loginService : LoginService, private router : Router) {
     this.isLoggedIn = loginService.getIsLoggedIn();
-    this.loginService.getIsLoggedInChange().subscribe((value) => {
+    this.loginService.getIsLoggedInChange().pipe(takeUntil(this.destroy$)).subscribe((value) => {
       this.isLoggedIn = value;
     });
   }
@@ -37,7 +37,8 @@ class AuthGuard implements CanActivate, CanLoad, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
 export default AuthGuard;
