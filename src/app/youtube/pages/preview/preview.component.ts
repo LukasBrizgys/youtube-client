@@ -22,8 +22,8 @@ class PreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    const id = this.activatedRoute.snapshot.url[0].path;
-    this.itemService.getSingleItem(id).pipe(take(1)).subscribe({
+    const id = this.activatedRoute.snapshot.url[1].path;
+    this.itemService.getSingleVideo(id).pipe(take(1)).subscribe({
 
       next: (value : SearchItem) => {
         this.isLoading = false;
