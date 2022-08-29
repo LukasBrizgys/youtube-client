@@ -1,7 +1,7 @@
 import {
   Component, OnDestroy, OnInit,
 } from '@angular/core';
-import { mergeMap, Subject, takeUntil } from 'rxjs';
+import { mergeMap, Subject, takeUntil, tap } from 'rxjs';
 import SearchResponse from '../../models/search-response.model';
 import SearchItem from '../../models/search-item.model';
 import { SortOrder } from '../../../shared/enums/sortOrder';
@@ -28,16 +28,18 @@ class SearchPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.itemService.getSearchStringObs()
-      .pipe(mergeMap((result : string) => {
-        this.isLoading = true;
-        return this.itemService.fetchSearchResults(result);
-      }))
-      .pipe(takeUntil(this.destroy$)).subscribe({
-        next: (data : SearchResponse) => {
-          this.isLoading = false;
-          this.searchResponse = data;
-        },
-      });
+      .pipe(
+        tap(() => { this.isLoading = true }),
+        mergeMap((result : string) =>
+          this.itemService.fetchSearchResults(result)),
+          takeUntil(this.destroy$)
+          )
+          .subscribe({
+            next: (data : SearchResponse) => {
+              this.isLoading = false;
+              this.searchResponse = data;
+            }
+          })
     this.sortingService.sortByDateOrder
       .pipe(takeUntil(this.destroy$))
       .subscribe((value : string | undefined) => {
@@ -82,7 +84,7 @@ class SearchPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+    this.destroy$.complete();
   }
 }
 export default SearchPageComponent;
