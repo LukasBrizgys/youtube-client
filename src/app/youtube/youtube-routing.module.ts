@@ -9,7 +9,7 @@ const routes : Routes = [
     path: '', component: SearchPageComponent, title: 'Search results', canActivate: [AuthGuard], canLoad: [AuthGuard],
   },
   {
-    path: ':id', canActivate: [AuthGuard], canLoad: [AuthGuard], component: PreviewComponent,
+    path: 'video/:id', canActivate: [AuthGuard], canLoad: [AuthGuard], component: PreviewComponent,
   },
 ];
 @NgModule({
