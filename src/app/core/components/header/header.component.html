@@ -5,7 +5,7 @@
     </div>
 
     <div class="search-container">
-      <input #searchInput (keyup) ="handleKeyUp(searchInput.value)" class="search-input" name="searchInput" placeholder="Enter text to search...">
+      <input #searchInput (keyup)="handleKeyUp(searchInput.value)" class="search-input" name="searchInput" placeholder="Enter text to search...">
     </div>
     <button (click)="toggleSettings()" mat-raised-button color="primary" class="settings-button"><mat-icon>tune</mat-icon></button>
 
