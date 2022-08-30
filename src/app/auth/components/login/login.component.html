@@ -1,13 +1,41 @@
 <div class="login-container">
-  <form (submit)="handleLogin()" class="login-form">
-    <div class="input-container">
-      <label for="login-username">Username: *</label>
-      <input type="text" id="login-username" name="username">
-    </div>
-    <div class="input-container">
-      <label for="login-password">Password: *</label>
-      <input type="password" id="login-password" name="password">
-    </div>
-    <button mat-raised-button color="primary" type="submit">Log in</button>
+  <form [formGroup]="loginForm" (submit)="handleLogin()" class="login-form">
+    <mat-form-field appearance="fill" class="input-container">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" id="login-username" name="email" formControlName="email">
+      <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Please enter a login email</mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">The login email is invalid</mat-error>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="input-container">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="password" formControlName="password">
+      <mat-error class="field-error" *ngIf="loginForm.get('password')?.errors?.['required']">Please enter a password</mat-error>
+
+      <mat-error id="password-error" *ngIf="loginForm.get('password')?.errors?.['passwordStrength']">
+        Your password isn't strong enough:
+      </mat-error>
+  <mat-error *ngIf="!loginForm.get('password')?.errors?.['passwordStrength']?.hasValidLength">
+            Must contain atleast 8 characters
+          </mat-error>
+
+          <mat-error *ngIf="!loginForm.get('password')?.errors?.['passwordStrength']?.hasLowerCase">
+            Must contain atleast one lower case character
+          </mat-error>
+
+          <mat-error *ngIf="!loginForm.get('password')?.errors?.['passwordStrength']?.hasUpperCase">
+            Must contain atleast one upper case character
+          </mat-error>
+
+          <mat-error *ngIf="!loginForm.get('password')?.errors?.['passwordStrength']?.hasNumeric">
+            Must contain atleast one number
+          </mat-error>
+
+          <mat-error *ngIf="!loginForm.get('password')?.errors?.['passwordStrength']?.hasSpecialChar">
+            Must contain atleast one special character
+          </mat-error>
+
+    </mat-form-field>
+    <button mat-raised-button class="login-button" color="primary" [disabled]="!loginForm.valid" type="submit">Log in</button>
   </form>
 </div>
