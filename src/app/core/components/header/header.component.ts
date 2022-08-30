@@ -2,7 +2,7 @@ import {
   Component, Input, OnDestroy,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import LoginService from 'src/app/auth/service/login.service';
+import LoginService from 'src/app/auth/service/login/login.service';
 import ItemService from 'src/app/youtube/service/item/item.service';
 
 @Component({
