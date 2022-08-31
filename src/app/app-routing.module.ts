@@ -11,6 +11,7 @@ const routes: Routes = [
 
   { path: 'login', loadChildren: () => import('./auth/auth.module').then((m) => m.default) },
   { path: '404', component: PageNotFoundComponent, title: '404' },
+  { path: '', loadChildren: () => import('./auth/auth.module').then((m) => m.default)},
   { path: '**', redirectTo: '/404' },
 ];
 
