@@ -6,11 +6,13 @@ import RegistrationComponent from './components/registration/registration.compon
 import AuthRoutingModule from './auth-routing.module';
 import LoginComponent from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import AdminPanelComponent from './components/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
     RegistrationComponent,
     LoginComponent,
+    AdminPanelComponent
   ],
   imports: [
     CommonModule,

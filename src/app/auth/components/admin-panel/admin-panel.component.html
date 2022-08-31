@@ -1,1 +1,46 @@
-<p>admin-panel works!</p>
+<div class="admin-panel-container">
+  <div class="card-creation-container">
+    <form [formGroup]="cardCreationForm" class="card-creation-form">
+      <mat-form-field appearance="fill" class="input-container">
+        <mat-label>Title</mat-label>
+        <input matInput type="text" name="title" formControlName="title">
+        <mat-error *ngIf="cardCreationForm.get('title')?.errors?.['required']">Please enter a title</mat-error>
+        <mat-error *ngIf="cardCreationForm.get('title')?.errors?.['minlength']">The title is too short</mat-error>
+        <mat-error *ngIf="cardCreationForm.get('title')?.errors?.['maxlength']">The title is too long</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-container">
+        <mat-label>Description</mat-label>
+        <input matInput type="text" name="description" formControlName="description">
+        <mat-error *ngIf="cardCreationForm.get('description')?.errors?.['maxlength']">The description is too long
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-container">
+        <mat-label>Image</mat-label>
+        <input matInput type="text" name="image" formControlName="image">
+        <mat-error *ngIf="cardCreationForm.get('image')?.errors?.['required']">Please enter a link to the image
+        </mat-error>
+        <mat-error
+          *ngIf="!cardCreationForm.get('image')?.errors?.['isURLValid'] && !cardCreationForm.get('image')?.errors?.['required']">
+          The image link is invalid</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-container">
+        <mat-label>Link video</mat-label>
+        <input matInput type="text" name="link" formControlName="link">
+        <mat-error *ngIf="cardCreationForm.get('link')?.errors?.['required']">Please enter a link to the video
+        </mat-error>
+        <mat-error
+          *ngIf="!cardCreationForm.get('link')?.errors?.['isURLValid'] && !cardCreationForm.get('link')?.errors?.['required']">
+          The video link is invalid</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-container">
+        <mat-label>Creation date</mat-label>
+        <input matInput type="text" name="date" placeholder="YYYY-mm-DD" formControlName="date">
+        <mat-error *ngIf="cardCreationForm.get('date')?.errors?.['required']">Please enter a creation date</mat-error>
+        <mat-error
+          *ngIf="!cardCreationForm.get('date')?.errors?.['isValidFutureDate'] && !cardCreationForm.get('date')?.errors?.['required']">
+          The date is invalid</mat-error>
+      </mat-form-field>
+      <button mat-raised-button class="card-creation-submit" [disabled]="!cardCreationForm.valid" color="primary" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
