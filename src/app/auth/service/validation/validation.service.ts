@@ -28,5 +28,33 @@ class ValidationService {
       };
     }
   }
+  urlValidator() : ValidatorFn {
+    return (control : AbstractControl) : ValidationErrors | null => {
+      try{
+        new URL(control.value);
+        return null;
+      }catch(e) {
+        return {
+          isUrlValid: false
+        }
+      }
+    }
+  }
+  validFutureDateValidator() : ValidatorFn {
+    return (control : AbstractControl) : ValidationErrors | null => {
+
+        const regex : RegExp = /^\d{4}-\d{2}-\d{2}$/;
+        const currentDate = new Date().getTime();
+        const value = control.value;
+        if(!value) return null;
+        if(value.match(regex) && Date.parse(value) > currentDate) return null;
+        return {
+          isValidFutureDate: false
+        }
+
+      }
+
+    }
+
 }
 export default ValidationService;
