@@ -9,16 +9,17 @@ import ValidationService from '../../service/validation/validation.service';
   styleUrls: ['./login.component.scss'],
 })
 class LoginComponent {
-  constructor(private loginService : LoginService, private fb : FormBuilder, private validationService : ValidationService) {}
+  constructor(
+    private loginService : LoginService,
+    private fb : FormBuilder,
+    private validationService : ValidationService,
+  ) {}
+
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, this.validationService.passwordStrengthValidator()]]
-  })
+    password: ['', [Validators.required, this.validationService.passwordStrengthValidator()]],
+  });
 
-  handleLogin = () : void => {
-    this.loginService.handleLogin()
-    console.log(this.loginForm);
-
-  };
+  handleLogin = () : void => this.loginService.handleLogin();
 }
 export default LoginComponent;
