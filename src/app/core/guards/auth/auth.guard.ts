@@ -3,7 +3,7 @@ import {
   CanActivate, CanLoad, Router, UrlTree,
 } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import LoginService from 'src/app/auth/service/login.service';
+import LoginService from 'src/app/auth/service/login/login.service';
 
 @Injectable({
   providedIn: 'root',
